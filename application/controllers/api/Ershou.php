@@ -59,10 +59,11 @@ class Ershou extends REST_Controller {
      * 添加一条二手信息
      */
     function add_post(){
+        $this->output->enable_profiler(TRUE);
         $base_url = $this->config->item('base_url');
         $user_id = $this->post('user_id');
         $title = $this->post('title');
-        $desc = $this->post('desc');
+        $description = $this->post('description');
         $old_price = $this->post('old_price');
         $now_price = $this->post('now_price');
         $goods_type = $this->post('goods_type');
@@ -77,7 +78,7 @@ class Ershou extends REST_Controller {
         }
         $time = date("YmdHis");
         $config['upload_path'] = $path;
-        $config['allowed_types'] = 'jpg';
+        $config['allowed_types'] = 'bmp|gif|jpeg|jpg|png';
         $config['max_size'] = '100';
         
         $attach_array = array();
@@ -112,7 +113,7 @@ class Ershou extends REST_Controller {
         $message = array(
             'id' => 0,
             'title' => $title,
-            'desc' => $desc,
+            'description' => $description,
             'old_price' => $old_price,
             'now_price' => $now_price,
             'goods_type' => $goods_type,
@@ -123,7 +124,7 @@ class Ershou extends REST_Controller {
         
         $es_item = array(
             'title' => $title,
-            'desc' => $desc,
+            'description' => $description,
             'old_price' => $old_price,
             'now_price' => $now_price,
             'goods_type' => $goods_type,
